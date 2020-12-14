@@ -23,7 +23,7 @@ public class HomeController {
    public String home() {
       
       //return "/admin/list";
-	   return "front/index";
+	   return "home";
    }
    
 }

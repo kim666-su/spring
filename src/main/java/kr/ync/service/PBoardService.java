@@ -24,6 +24,12 @@ public interface PBoardService {
 	
 	// 글 목록 페이징 
 	public List<FishingPboardVO> getListWithPaging(Criteria cri);
+	
+	// 전체 글 목록
+	public List<FishingPboardVO> getList1();
+		
+	// 글 목록 페이징 
+	public List<FishingPboardVO> getList1WithPaging(Criteria cri);
 
 	//추가
 	public int getTotal(Criteria cri);

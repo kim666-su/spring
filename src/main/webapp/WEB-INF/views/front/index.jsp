@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
 <!DOCTYPE HTML>
 <html>
 
 <head>
 	<title>Adventure Gaming a Games a Category Flat Bootstarp Responsive Website Template | Home :: w3layouts</title>
-	<link href="resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
+	<link href="../resources/css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<!-- jQuery (necessary JavaScript plugins) -->
-	<script src="resources/js/bootstrap.js"></script>
+	<script src="../resources/js/bootstrap.js"></script>
 	<!-- Custom Theme files -->
-	<link href="resources/css/style.css" rel='stylesheet' type='text/css' />
+	<link href="../resources/css/style.css" rel='stylesheet' type='text/css' />
 	<!-- Custom Theme files -->
 	<!--//theme-style-->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,7 +21,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script
 		type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 
-	<script src="resources/js/jquery.min.js"></script>
+	<script src="../resources/js/jquery.min.js"></script>
 
 </head>
 
@@ -39,7 +40,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="clearfix"></div>
 				</div>
 				<div class="loggg">
-					<a href="/front/login">login</a>
+				<sec:authorize access="isAuthenticated()">   
+               <a href="/front/logout"> Logout</a>
+               </sec:authorize>
 				</div>
 				<div class="headr-right">
 					<div class="details">
@@ -59,8 +62,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<ul class="nav1">
 						<li class="active"><a href="/">홈</a></li>
 						<li><a href="/front/about">자유</a></li>
-						<li><a href="/front/reviews">리뷰</a></li>
-						<li><a href="/front/typo">낚시포인트</a></li>
+						<li><a href="/front/reviews">낚시포인트</a></li>
+						<li><a href="/front/typo">리뷰</a></li>
 						<li><a href="/front/gallery">메인페이지</a></li>
 					</ul>
 				</div>
@@ -80,7 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<!-- banner -->
 	<!-- Slider-starts-Here -->
-	<script src="resources/js/responsiveslides.min.js"></script>
+	<script src="../resources/js/responsiveslides.min.js"></script>
 	<script>
 		$(function () {
 			$("#slider").responsiveSlides({
@@ -140,28 +143,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="game-grid">
 							<h4>Action Games</h4>
 							<p>Nulla elementum nunc tempus.</p>
-							<img src="resources/img/t1.jpg" class="img-responsive" alt="" />
+							<img src="../resources/img/t1.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
 					<li>
 						<div class="game-grid">
 							<h4>Racing Games</h4>
 							<p>Nulla elementum nunc tempus.</p>
-							<img src="resources/img/t3.jpg" class="img-responsive" alt="" />
+							<img src="../resources/img/t3.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
 					<li>
 						<div class="game-grid">
 							<h4>3D Games</h4>
 							<p>Nulla elementum nunc tempus.</p>
-							<img src="resources/img/t4.jpg" class="img-responsive" alt="" />
+							<img src="../resources/img/t4.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
 					<li>
 						<div class="game-grid">
 							<h4>Arcade Games</h4>
 							<p>Nulla elementum nunc tempus.</p>
-							<img src="resources/img/t2.jpg" class="img-responsive" alt="" />
+							<img src="../resources/img/t2.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
 				</ul>
@@ -192,7 +195,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						});
 					});
 				</script>
-				<script type="text/javascript" src="resources/js/jquery.flexisel.js"></script>
+				<script type="text/javascript" src="../resources/js/jquery.flexisel.js"></script>
 			</div>
 		</div>
 	</div>
@@ -215,47 +218,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="latest">
 			<div class="container">
 				<div class="left_box">
-					<div class="latest-games">
-		 <thead>
+			<div class="latest-games">
+			  <table class="table table-striped table-bordered table-hover">
+               <thead>
                   <tr>
-                     <th>#번호</th>
+                     <th>번호</th>
                      <th>제목</th>
                      <th>작성자</th>
                      <th>작성일</th>
-                     <th>수정일</th>
                   </tr>
                </thead>
 
-               <c:forEach items="${index}" var="free_board">
+               <c:forEach items="${list}" var="list">
                   <tr>
-                     <td><c:out value="${free_board.board_idx}" /></td>
-                     <td><a class='move' href='<c:out value="${free_board.board_idx}"/>'><c:out value="${free_board.title}" />
-                     <b>[<c:out value="${board.replyCnt}" />]</b></a> 
-                     </td>
-                     <td><c:out value="${free_board.nick}" /></td>
-                     <td><fmt:formatDate pattern="yyyy-MM-dd" value="${free_board.d_date}" /></td>
-                     <td><fmt:formatDate pattern="yyyy-MM-dd" value="${free_board.d_date}" /></td>
+                     <td><c:out value="${list.board_idx}" /></td>
+                     <td><a class='move' href='<c:out value="${list.board_idx}"/>'><c:out value="${list.title}" />
+                     <td><c:out value="${list.id}" /></td>
                   </tr>
                </c:forEach>
                
             </table>
 						<span></span>
-					</div>0
+					</div>
 				</div>
 				<div class="right_box">
-					<div class="latest-games">
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<p>제목 날짜 닉네임</p>
-						<span></span>
-					</div>
+				  <table class="table table-striped table-bordered table-hover">
+               <thead>
+                  <tr>
+                     <th>번호</th>
+                     <th>제목</th>
+                     <th>작성자</th>
+                     <th>작성일</th>
+                  </tr>
+               </thead>
+
+               <c:forEach items="${list}" var="list">
+                  <tr>
+                     <td><c:out value="${list.board_idx}" /></td>
+                     <td><a class='move' href='<c:out value="${list.board_idx}"/>'><c:out value="${list.title}" />
+                     <td><c:out value="${list.id}" /></td>
+                  </tr>
+               </c:forEach>
+               
+            </table>
 				</div>
 			</div>
 			<!-- poster -->
@@ -287,7 +292,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<a class="hvr-bounce-to-top" href="front/reviews">Read More</a>
 						</div>
 						<div class="col-md-5 x-box-right">
-							<img src="resources/img/xbox.jpg" class="img-responsive" alt="" />
+							<img src="../resources/img/xbox.jpg" class="img-responsive" alt="" />
 						</div>
 						<div class="clearfix"></div>
 					</div>

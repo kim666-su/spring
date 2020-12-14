@@ -80,4 +80,20 @@ public class PBoardServiceImpl implements PBoardService {
 		return mapper.getTotalCount(cri);
 	}
 
+	 @Override
+	 public List<FishingPboardVO> getList1() {
+	
+		 log.info("getList..........");
+		
+		 return mapper.getList();
+	 }
+
+	@Override
+	public List<FishingPboardVO> getList1WithPaging(Criteria cri) {
+
+		log.info("get List with criteria: " + cri);
+
+		return mapper.getListWithPaging(cri);
+	}
+
 }

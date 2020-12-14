@@ -28,9 +28,9 @@
 			<div class="wrapper">
 				<div class="form-section">
 					<h3>로그인</h3>
-					<form action="#" method="post" class="signin-form">
+					<form action="/login" method="post" class="signin-form">
 						<div class="form-input">
-							<input type="text" name="Username" placeholder="아이디" required="" autofocus>
+							<input type="text" name="username" placeholder="아이디" required="" autofocus>
 						</div>
 						<div class="form-input">
 							<input type="password" name="password" placeholder="비밀번호" required="">
@@ -49,6 +49,8 @@
 								<a href="/front/forgot_pass" class="signuplink">비밀번호 찾기</a>
 							</div>
 						</div>
+							<input type="hidden" name="${_csrf.parameterName}"
+								value="${_csrf.token}" />
 					</form>
 					<p class="signup">아직 계정이 없으신가요? &nbsp;&nbsp;&nbsp;&nbsp; <a href="/front/sign_up"
 							class="signuplink">회원가입</a>

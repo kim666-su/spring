@@ -50,8 +50,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  <ul class="nav1">
 				<li><a href="/">홈</a></li>
 					<li><a href="/front/about">자유</a></li>
-					<li><a href="/front/reviews">리뷰</a></li>
-					<li><a href="/front/gallery">낚시포인트</a></li>
+					<li><a href="/front/reviews">낚시포인트</a></li>
+					<li><a href="/front/gallery">리뷰</a></li>
 					<li class="active"><a href="/front/contact">메인페이지</a></li>
 			  </ul>
 		 </div>	

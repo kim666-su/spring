@@ -1,241 +1,38 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.ync.mapper.FishingMemberMapper">
-   
-   <sql id="criteria">
-      <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-         <foreach item='type' collection="typeArr">
-            <trim prefix="OR">
-               <choose>
-                  <when test="type == 'T'.toString()">
-                     title like '%'||#{keyword}||'%'
-                  </when>
-                  <when test="type == 'C'.toString()">
-                     content like '%'||#{keyword}||'%'
-                  </when>
-                  <when test="type == 'W'.toString()">
-                     writer like '%'||#{keyword}||'%'
-                  </when>
-               </choose>
-            </trim>
-         </foreach>
-      </trim>
-   </sql>
-   
-   <select id="getList" resultType="kr.ync.domain.BoardVO">
-   <![CDATA[
-      select * from tbl_board where bno > 0 
-      ]]>
-   </select>
-   
-   <insert id="insert">
-      insert into member (id, pwd, nick, p_num, name)
-      values (#{id}, #{pwd}, #{nick}, #{p_num}, #{name})
-   </insert>
-   
-   <insert id="insertSelectKey">
 
-      <selectKey keyProperty="bno" order="BEFORE"
-         resultType="Long">
-         select seq_board.nextval from dual
-      </selectKey>
+	<resultMap type="kr.ync.domain.FishingMemberVO" id="FishingMemberMapper">
+		<id property="id" column="id"/>
+		<result property="id" column="id"/>
+		<result property="pwd" column="pwd"/>
+		<result property="nick" column="nick"/>
+		<result property="p_num" column="pnum"/>
+		<result property="name" column="name"/>
+		<collection property="auth" resultMap="authMap">
+		</collection>
+	</resultMap>
+	
+	<resultMap type="kr.ync.domain.AuthVO" id="authMap">
+		<result property="id" column="id"/>
+		<result property="auth" column="auth"/>
+	</resultMap>
 
-      insert into tbl_board (bno,title,content, writer, file_1, file_2, file_3)
-      values (#{bno},
-      #{title}, #{content}, #{writer}, #{file_1}, #{file_2}, #{file_3})
-   </insert>
-   
-   <select id="read" resultType="kr.ync.domain.BoardVO">
-      select * from tbl_board where bno =   #{bno}
-   </select>
+	<!--
+	member_auth table은 사용 하지 않고 AuthVO만 사용한다.
+	tbl_member 의 autho 컬럼 정보만 따로 담아는 객차이다.
+	Spring Security의 기본 사용법과 다르게 tbl_member에 권한 컴럼(auth)을
+	넣어서 사용하기에 기본 사용법과 달라진다.
+	-->
+	<select id="read" resultMap="FishingMemberMapper">
+	SELECT	id,
+			pwd,
+			nick,
+			p_num,
+			name,
+			auth
+	FROM	member
+	WHERE	id = #{id} 
+	</select>
 
-
-   <delete id="delete">
-      delete tbl_board where bno = #{bno}
-   </delete>
- 
-   <update id="update">
-      update tbl_board
-      set title= #{title},
-      content=#{content},
-      writer = #{writer},
-      file_1 = #{file_1},
-      file_2 = #{file_2},
-      file_3 = #{file_3},
-      updateDate = sysdate
-      where bno =
-      #{bno}
-   </update>
-   
-   <!-- <select id="getListWithPaging" resultType="kr.ync.domain.BoardVO">
-      <![CDATA[
-        SELECT   bno,
-              title,
-              content,
-              writer,
-              regdate,
-              updatedate
-      FROM   (SELECT /*+INDEX_DESC(tbl_board pk_board) */
-                  rownum rn,
-                  bno,
-                  title,
-                  content,
-                  writer,
-                  regdate,
-                  updatedate
-            FROM   tbl_board
-            WHERE   rownum <= 20 
-            )
-      WHERE rn > 10   
-      ]]>
-   </select> -->
-   <!-- 
-   <select id="getListWithPaging" resultType="kr.ync.domain.BoardVO">
-      <![CDATA[
-        SELECT   bno,
-              title,
-              content,
-              writer,
-              regdate,
-              updatedate
-      FROM   (SELECT /*+INDEX_DESC(tbl_board pk_board) */
-                  rownum rn,
-                  bno,
-                  title,
-                  content,
-                  writer,
-                  regdate,
-                  updatedate
-            FROM   tbl_board
-            WHERE   rownum <= #{pageNum} * #{amount}
-            )
-      WHERE rn > (#{pageNum} -1) * #{amount}
-      ]]>
-   </select>
-    -->
-   <!-- 
-   <select id="getListWithPaging" resultType="kr.ync.domain.BoardVO">
-      <![CDATA[
-         SELECT   bno,
-               title,
-               content,
-               writer,
-               regdate,
-               updatedate
-         FROM   (SELECT /*+INDEX_DESC(tbl_board pk_board) */
-                       rownum rn,
-                       bno,
-                       title,
-                       content,
-                       writer,
-                       regdate,
-                       updatedate 
-               FROM   tbl_board
-               WHERE
-      ]]>   
-               <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-                  <foreach item='type' collection="typeArr">
-                     <trim prefix="OR">
-                        <choose>
-                           <when test="type == 'T'.toString()">
-                              title like '%'||#{keyword}||'%'
-                           </when>
-                           <when test="type == 'C'.toString()">
-                              content like '%'||#{keyword}||'%'
-                           </when>
-                           <when test="type == 'W'.toString()">
-                              writer like '%'||#{keyword}||'%'
-                           </when>
-                        </choose>
-                     </trim>
-                  </foreach>
-               </trim>
-      <![CDATA[
-               rownum <= #{pageNum} * #{amount}
-                  )
-         WHERE rn > (#{pageNum} -1) * #{amount}   
-        ]]>
-   </select>
-    -->
-   
-   <!-- <select id="getListWithPaging" resultType="kr.ync.domain.BoardVO">
-      <![CDATA[
-      SELECT   bno,
-            title,
-            content,
-            writer,
-            regdate,
-            updatedate
-      FROM   (SELECT /*+INDEX_DESC(tbl_board pk_board) */
-                    rownum rn,
-                    bno,
-                    title,
-                    content,
-                    writer,
-                    regdate,
-                    updatedate 
-               FROM   tbl_board
-            WHERE 
-        ]]>
-        
-      <include refid="criteria"></include> 
-      
-      <![CDATA[    
-               rownum <= #{pageNum} * #{amount}
-               )
-        WHERE rn > (#{pageNum} -1) * #{amount}   
-      ]]>
-   </select> -->
-   
-   <select id="getListWithPaging" resultType="kr.ync.domain.BoardVO">
-      <![CDATA[
-      SELECT   bno,
-            title,
-            content,
-            writer,
-            regdate,
-            updatedate,
-            replycnt
-      FROM   (SELECT /*+INDEX_DESC(tbl_board pk_board) */
-                    rownum rn,
-                    bno,
-                    title,
-                    content,
-                    writer,
-                    regdate,
-                    updatedate,
-                    replycnt
-               FROM   tbl_board
-            WHERE 
-        ]]>
-      <include refid="criteria"></include> 
-      
-      <![CDATA[    
-               rownum <= #{pageNum} * #{amount}
-               )
-        WHERE rn > (#{pageNum} -1) * #{amount}   
-      ]]>
-   </select>
-   
-   <!-- 
-   <select id="getTotalCount" resultType="int">
-      <![CDATA[
-      select count(*) from tbl_board where 
-      bno > 0
-      ]]>
-   </select>
-    -->
-   <select id="getTotalCount" resultType="int">
-      select count(*) from tbl_board where 
-      
-      <include refid="criteria"></include>
-      
-      <![CDATA[
-      bno > 0
-      ]]>
-   </select>
-   
-   <update id="updateReplyCnt">
-      UPDATE tbl_board SET replycnt = replycnt + #{amount} WHERE bno = #{bno}
-   </update> 
 </mapper>

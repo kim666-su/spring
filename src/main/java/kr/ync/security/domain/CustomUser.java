@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
+import kr.ync.domain.FishingMemberVO;
 import kr.ync.domain.MemberVO;
 import lombok.Getter;
 
@@ -15,17 +16,19 @@ public class CustomUser extends User {
 
 	private static final long serialVersionUID = 1L;
 
-	private MemberVO member;
+	private FishingMemberVO member;
 
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 	}
 
-	public CustomUser(MemberVO vo) {
+	public CustomUser(FishingMemberVO vo) {
 
-		super(vo.getUserid(), vo.getUserpw(), vo.getAuthList().stream()
+		super(vo.getId(), vo.getPwd(), vo.getAuth().stream()
 				.map(auth -> new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
 
 		this.member = vo;
 	}
+
+	
 }

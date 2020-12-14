@@ -54,8 +54,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<ul class="nav1">
 					<li><a href="/">홈</a></li>
 					<li><a href="/front/about">자유</a></li>
-					<li><a href="/front/reviews">리뷰</a></li>
-					<li class="active"><a href="/front/gallery">낚시포인트</a></li>
+					<li><a href="/front/reviews">낚시포인트</a></li>
+					<li class="active"><a href="/front/gallery">리뷰</a></li>
 					<li><a href="/front/contact">메인페이지</a></li>
 				</ul>
 			</div>
@@ -79,89 +79,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- content -->
 	<div class="review">
 		<div class="container">
-			<h2>자유 게시판</h2>
+			<h2>리뷰 게시판</h2>
 			<div class="writing"><a href="#">글쓰기</a></div>
-			<div class="review-md1">
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="front/single"><img class="img-responsive" src="../../resources/img/re7.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="front/single"><img class="img-responsive" src="../../resources/img/re1.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="front/single"><img class="img-responsive" src="../../resources/img/re2.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="review-md1">
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="single.jsp"><img class="img-responsive" src="../../resources/img/re3.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="single.jsp"><img class="img-responsive" src="../../resources/img/re4.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="single.jsp"><img class="img-responsive" src="../../resources/img/re5.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="review-md1">
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="single.jsp"><img class="img-responsive" src="../../resources/img/re6.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="single.jsp"><img class="img-responsive" src="../../resources/img/re7.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="col-md-4 sed-md">
-					<div class=" col-1">
-						<a href="single.jsp"><img class="img-responsive" src="../../resources/img/re2.jpg" alt=""></a>
-						<h4><a href="single.jsp">Sed ut perspiciatis unde omnis</a></h4>
-						<p>Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature
-						</p>
-					</div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
+				<table class="table table-striped table-bordered table-hover">
+               <thead>
+                  <tr>
+                     <th>번호</th>
+                     <th>말머리</th>
+                     <th>제목</th>
+                     <th>작성자</th>
+                     <th>닉네임</th>
+                     <th>작성일</th>
+                  </tr>
+               </thead>
+
+               <c:forEach items="${list}" var="list">
+                  <tr>
+                     <td><c:out value="${list.board_idx}" /></td>
+                     <td><c:out value="${list.h_title}" /></td>
+                     <td><a class='move' href='<c:out value="${list.board_idx}"/>'><c:out value="${list.title}" />
+                     <td><c:out value="${list.id}" /></td>
+                     <td><c:out value="${list.nick }"/></td>
+    				 <td><c:out value="${list.d_date}" /></td>
+                  </tr>
+               </c:forEach>
+               
+           	 </table>
 		</div>
 	</div>
 	<!-- footer -->

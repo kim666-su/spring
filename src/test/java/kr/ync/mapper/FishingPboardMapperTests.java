@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import kr.ync.domain.BoardVO;
 import kr.ync.domain.FishingPboardVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -18,21 +19,39 @@ public class FishingPboardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private FishingPboardMapper mapper;
 
+//	@Test
+//	public void testRead() {
+//
+//		FishingPboardVO pd = new FishingPboardVO();
+//		pd.setId("dsdi0508");
+//		pd.setH_title("포인트");
+//		pd.setTitle("sex");
+//		pd.setNick("다람쥐");
+//		pd.setContent("동완이");
+//
+//		mapper.insert(pd);
+//	      
+//	    log.info(pd);
+//
+//	}
+	
 	@Test
-	public void testRead() {
+	public void testInsert() {
 
-		FishingPboardVO pd = new FishingPboardVO();
-		pd.setId("dsdi0508");
-		pd.setH_title("포인트");
-		pd.setTitle("sex");
-		pd.setNick("다람쥐");
-		pd.setContent("동완이");
+		FishingPboardVO board = new FishingPboardVO();
+		board.setBoard_idx(1);
+		board.setId("dsdi0508");
+		board.setTitle("글글글");
+		board.setNick("다람이");
+		board.setContent("북극다람지");
+		board.setH_title("포인트");
+		
 
-		mapper.insert(pd);
-	      
-	    log.info(pd);
+		mapper.insert(board);
 
+		log.info(board);
 	}
+//
 	
 //	@Test
 //	public void testDelete() {
