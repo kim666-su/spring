@@ -22,22 +22,22 @@
       </trim>
    </sql>
    
-   <select id="getList" resultType="kr.ync.domain.BoardVO">
+   <select id="getList" resultType="kr.ync.domain.FishingFboardVO">
    <![CDATA[
       select * from tbl_free_board where board_idx > 0 
       ]]>
    </select>
    
    <insert id="insert">
- 	  insert into tbl_free_board (board_idx, id, title, nick, content, recom_up, recom_dawn)
-      values (seq_free_board.nextval, #{id}, #{title}, #{nick}, #{content}, #{recom_up}, #{recom_dawn})
+ 	  insert into tbl_free_board (board_idx, title, id, content, file_1, file_2, file_3)
+      values (seq_free_board.nextval, #{title}, #{id}, #{content}, #{file_1}, #{file_2}, #{file_3})
    </insert>
    
    <insert id="insertSelectKey">
 
       <selectKey keyProperty="board_idx" order="BEFORE"
          resultType="Long">
-         select seq_board.nextval from dual
+         select seq_free_board.nextval from dual
       </selectKey>
 
       insert into tbl_free_board (board_idx,title,content,nick, file_1, file_2, file_3)
@@ -45,7 +45,7 @@
       #{title}, #{content}, #{nick}, #{file_1}, #{file_2}, #{file_3})
    </insert>
    
-   <select id="read" resultType="kr.ync.domain.BoardVO">
+   <select id="read" resultType="kr.ync.domain.FishingFboardVO">
       select * from tbl_free_board where board_idx =   #{board_idx}
    </select>
 
@@ -190,9 +190,7 @@
             title,
             d_date,
             nick,
-            content,
-            recom_up,
-            recom_dawn
+            content
       FROM   (SELECT /*+INDEX_DESC(tbl_free_board pk_board) */
                     rownum rn,
                     board_idx,
@@ -200,9 +198,7 @@
                     title,
                     d_date,
                     nick,
-                    content,
-                    recom_up,
-                    recom_dawn
+                    content
                FROM   tbl_free_board
             WHERE 
         ]]>

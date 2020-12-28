@@ -67,6 +67,71 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						// Animation complete.
 					});
 				});
+				$(document).ready(function() {
+					var result = '<c:out value="${result}"/>';
+					
+					checkModal(result);
+					// replaceState(data, title [, url ]) 히스토리를 수정
+					history.replaceState({}, null, null);
+
+					function checkModal(result) {
+						// alert(history.state);
+						// 글 등록 후 리스트 화면에서 model창이 나온 뒤 새로고침을 해도 model창이 안나오도록
+						// result값 체크
+						// result값은 controller에서 넘어온 1회성 값으로 페이지를 다시 읽으면 null이된다.
+						// history.state 는 조회에서 back 했을때 history객체의 현재 정보를 읽어 값이 있다면 
+						// modal창을 띄우지 않는다.
+						if (result === '' || history.state) {
+							return;
+						}
+
+						if (parseInt(result) > 0) {
+							$(".modal-body").html("게시글 " + parseInt(result)	+ " 번이 등록되었습니다.");
+						}
+
+						$("#myModal").modal("show");
+					}
+					
+					$("#regBtn").on("click", function() {
+						self.location = "/board/register";
+					});
+					
+					var actionForm = $("#actionForm");
+
+					// 페이지 번호 클릭 이벤트
+					$(".paginate_button a").on("click", function(e) {
+						e.preventDefault();
+						// console.log('click');
+						actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+						actionForm.submit();
+					});
+					
+					// 상세보기 클릭 이벤트
+					$(".move").on("click",function(e) {
+						e.preventDefault();
+						actionForm.append("<input type='hidden' name='board_idx' value='" + $(this).attr("href")	+ "'>");
+						actionForm.attr("action", "/board/get");
+						actionForm.submit();
+					});
+					
+					// 검색 버튼 클릭 이벤트
+					var searchForm = $("#searchForm");
+					$("#searchForm button").on("click",	function(e) {
+						if (!searchForm.find("option:selected").val()) {
+							alert("검색종류를 선택하세요");
+							return false;
+						}
+
+						if (!searchForm.find("input[name='keyword']").val()) {
+							alert("키워드를 입력하세요");
+							return false;
+						}
+						
+						searchForm.find("input[name='pageNum']").val("1");
+						e.preventDefault();
+						searchForm.submit();
+					});
+				});
 			</script>
 			<!-- /script-for-menu -->
 			<div class="clearfix"></div>
@@ -125,6 +190,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</p>
 					</div>
 				</div>
+				
 				<!---->
 
 

@@ -40,8 +40,15 @@ public class FBoardController {
    
    @PreAuthorize("hasRole('ROLE_USER')")
    @GetMapping("/index")
-   public void index() {
-	   
+   public void index(Criteria cri, Model model) {
+	   log.info("list: " + cri);
+	      
+	      // 게시판의 글은 지속적으로 등록, 삭제 되기에 매번 list를 호출 할때 total을 구해와야 한다. 
+	      int total = service.getTotal(cri);
+	      log.info("total: " + total);
+	      model.addAttribute("list", service.getListWithPaging(cri));
+	      model.addAttribute("pageMaker", new PageDTO(cri, total));
+	      
    }
    
    @PreAuthorize("hasRole('ROLE_USER')")
@@ -143,11 +150,11 @@ public class FBoardController {
 
       rttr.addFlashAttribute("result", board.getId());
 
-      return "redirect:/front/list";
+      return "redirect:/front/about";
    }
 
    @GetMapping({ "/get", "/modify" })
-   public void get(@RequestParam("bno") Long board_idx, @ModelAttribute("cri") Criteria cri, Model model) {
+   public void get(@RequestParam("board_idx") Long board_idx, @ModelAttribute("cri") Criteria cri, Model model) {
 
       log.info("/get or modify");
       model.addAttribute("freeboard", service.get(board_idx));

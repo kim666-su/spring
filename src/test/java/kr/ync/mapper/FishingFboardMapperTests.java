@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import kr.ync.domain.FishingFboardVO;
+import kr.ync.domain.FishingPboardVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -18,6 +19,22 @@ public class FishingFboardMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private FishingFboardMapper mapper;
 
+	
+	
+	@Test
+	public void testInsert() {
+
+		FishingFboardVO fd = new FishingFboardVO();
+		fd.setId("user1");
+		fd.setTitle("글글글");
+		fd.setContent("북극다람지");
+		
+
+		mapper.insert(fd);
+
+		log.info(fd);
+	}
+	
 //	@Test
 //	public void testRead() {
 //

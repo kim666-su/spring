@@ -13,8 +13,6 @@ public class FishingFboardVO {
 	private String nick;
 	private Date d_date;
 	private String content;
-	private int recom_up;
-	private int recom_dawn;
 	
 	private String file_1;
 	private String file_2;

@@ -23,15 +23,11 @@
    </sql>
    
    <select id="getList" resultType="kr.ync.domain.FishingPboardVO">
-   <![CDATA[
 		select * from tbl_point_board where board_idx > 0 AND H_TITLE LIKE '포인트'
-      ]]>
    </select>
    
       <select id="getList1" resultType="kr.ync.domain.FishingPboardVO">
-   <![CDATA[
 		select * from tbl_point_board where board_idx > 0 AND H_TITLE LIKE '리뷰'
-      ]]>
    </select>
    
    <insert id="insert">

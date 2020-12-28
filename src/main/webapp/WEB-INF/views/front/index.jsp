@@ -41,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="loggg">
 				<sec:authorize access="isAuthenticated()">   
-               <a href="/front/logout"> Logout</a>
+               <a href="/front/login"> Logout</a>
                </sec:authorize>
 				</div>
 				<div class="headr-right">
@@ -102,27 +102,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 				<div class="slid banner1">
 					<div class="caption">
-						<h3>Adventure Game - 343 industries - master chief</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec pellentesque ex. Morbi
-							iaculis mi in varius auctor. Nullam feugiat erat ex, eu vehicula velit efficitur non.</p>
+						<h3>군산 비응항</h3>
 					</div>
 				</div>
 
 
 				<div class="slid banner2">
 					<div class="caption">
-						<h3>God of war - kratos - sony santa monica</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec pellentesque ex. Morbi
-							iaculis mi in varius auctor. Nullam feugiat erat ex, eu vehicula velit efficitur non.</p>
+						<h3>곽지과물해변</h3>
 					</div>
 				</div>
 
 
 				<div class="slid banner3">
 					<div class="caption">
-						<h3>Battlefield 4 - game - explosion - digital illusions</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nec pellentesque ex. Morbi
-							iaculis mi in varius auctor. Nullam feugiat erat ex, eu vehicula velit efficitur non.</p>
+						<h3>제주 북서부 갯바위</h3>
 					</div>
 				</div>
 
@@ -134,36 +128,36 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="content">
 		<div class="container">
 			<div class="top-games">
-				<h3>인기 게시글</h3>
+				<h3>신상 낚시대</h3>
 				<span></span>
 			</div>
 			<div class="top-game-grids">
 				<ul id="flexiselDemo1">
 					<li>
 						<div class="game-grid">
-							<h4>Action Games</h4>
-							<p>Nulla elementum nunc tempus.</p>
+							<h4>크레만 어택트 베이트릴</h4>
+							<p>11kg 드랙력 구현!!</p>
 							<img src="../resources/img/t1.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
 					<li>
 						<div class="game-grid">
-							<h4>Racing Games</h4>
-							<p>Nulla elementum nunc tempus.</p>
+							<h4>RAID-XR215</h4>
+							<p>고탄성 카본 블랭크 사용</p>
 							<img src="../resources/img/t3.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
 					<li>
 						<div class="game-grid">
-							<h4>3D Games</h4>
-							<p>Nulla elementum nunc tempus.</p>
+							<h4>울트라라이트 에깅2.1</h4>
+							<p>초 경량화 카본 낚시대</p>
 							<img src="../resources/img/t4.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
 					<li>
 						<div class="game-grid">
-							<h4>Arcade Games</h4>
-							<p>Nulla elementum nunc tempus.</p>
+							<h4>RAID-XD(Evo)</h4>
+							<p>뭄바스네츠 시그니쳐 낚시대</p>
 							<img src="../resources/img/t2.jpg" class="img-responsive" alt="" />
 						</div>
 					</li>
@@ -222,18 +216,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			  <table class="table table-striped table-bordered table-hover">
                <thead>
                   <tr>
-                     <th>번호</th>
                      <th>제목</th>
-                     <th>작성자</th>
-                     <th>작성일</th>
+                     <th>닉네임</th>
                   </tr>
                </thead>
 
                <c:forEach items="${list}" var="list">
                   <tr>
-                     <td><c:out value="${list.board_idx}" /></td>
                      <td><a class='move' href='<c:out value="${list.board_idx}"/>'><c:out value="${list.title}" />
-                     <td><c:out value="${list.id}" /></td>
+                     <td><c:out value="${list.nick }"/></td>
                   </tr>
                </c:forEach>
                
@@ -242,21 +233,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</div>
 				<div class="right_box">
-				  <table class="table table-striped table-bordered table-hover">
+				 <table class="table table-striped table-bordered table-hover">
                <thead>
                   <tr>
-                     <th>번호</th>
                      <th>제목</th>
-                     <th>작성자</th>
-                     <th>작성일</th>
+                     <th>닉네임</th>
                   </tr>
                </thead>
 
                <c:forEach items="${list}" var="list">
                   <tr>
-                     <td><c:out value="${list.board_idx}" /></td>
                      <td><a class='move' href='<c:out value="${list.board_idx}"/>'><c:out value="${list.title}" />
-                     <td><c:out value="${list.id}" /></td>
+                     <td><c:out value="${list.nick }"/></td>
                   </tr>
                </c:forEach>
                

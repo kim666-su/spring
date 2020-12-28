@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import kr.ync.domain.BoardVO;
+import kr.ync.domain.FishingFboardVO;
 import kr.ync.domain.FishingPboardVO;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;

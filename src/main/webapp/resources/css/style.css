@@ -162,7 +162,7 @@ background-position:-180px -9px;
 }
 .top-menu ul li a{
 	display:block;
-	color:#fff;
+	color:#000;
 	padding:0.5em 1em;
 	text-decoration:none;
 	font-family: 'Play-Regular';
@@ -1866,14 +1866,14 @@ ul.nav1 {
 }
 .top-menu ul.nav1 li.active{
 	background:#f43c60;
-	color:#fff;
+	color:#000000;
 }
 .top-menu ul li.active a, .top-menu ul li a:hover {
   color: #FFFFFF;
 }
 .top-menu ul.nav1 li:hover{
 	background:#f43c60;
-	color:#fff;
+	color:#000000;
 	transition:0.5s all;
 	-webkit-transition:0.5s all;
 	-moz-transition:0.5s all;

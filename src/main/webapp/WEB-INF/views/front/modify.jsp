@@ -80,7 +80,7 @@ function getThumbFileName(fullFilePath) {
       <c:if test="${not empty board[t]}">
          <a href="../resources/upload/${board[t]}" target="_blank"><img src="../resources/upload/${board[t]}" id="thumb_${i}"></a>
          <script>
-              document.getElementById('thumb_${i}').src="/resources/upload/" + getThumbFileName('${board[t]}');
+              document.getElementById('thumb_${i}').src="../resources/upload/" + getThumbFileName('${board[t]}');
          </script>
       </c:if>
       <input type="file" class="form-control" name='uploadFile'>
